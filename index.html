@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <script>
+        let requestURL = 'ezquiz.json'; 
+        let request = new XMLHttpRequest(); 
+        request.onreadystatechange = function () { 
+            if (request.readyState == 4 && request.status == 200) {             
+                dataReportStatus(JSON.parse(request.responseText));            
+            } }; 
+        request.open("GET", requestURL, true); 
+        request.send(); 
+        
+        function dataReportStatus(data) { 
+            for (let i = 0; i < data.tracks.items.length; i++) { 
+                document.write("<div class='card'>");
+                document.write("<div class='card-header'> <img src='"+ data.tracks.items[i].album.images[0].url +"' alt='picture'>");
+                document.write("</div>");
+                document.write("<div class='card-body'>");
+                document.write("<h3>"+ data.tracks.items[i].name +"</h3>");
+                document.write("<p>Artists : "+data.tracks.items[i].artists[i].name+"</p>")
+                document.write("<p>Release date : "+data.tracks.items[i].album.release_date+"</p>")
+                document.write("<p>Avialiable :"+data.tracks.items[i].album.available_markets.length+"countries</p>")
+                document.write("</div>");
+                document.write("</div>");
+            } 
+        }
+    </script> 
+</body>
+</html>
